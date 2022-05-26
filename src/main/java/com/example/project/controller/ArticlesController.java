@@ -6,7 +6,9 @@ import com.example.project.repository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -34,5 +36,16 @@ public class ArticlesController {
         log.info(saved.toString());
 
         return "";
+    }
+
+    @GetMapping("/articles/{id}")
+    public String show(@PathVariable Long id, Model model){
+        log.info("id : " + id);
+
+        Article article = articleRepository.findById(id).orElse(null); // 데이터가 없으면 null값 반환
+
+        model.addAttribute("article", article);
+
+        return "articles/show";
     }
 }
