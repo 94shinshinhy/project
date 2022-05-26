@@ -39,7 +39,7 @@ public class ArticlesController {
     }
 
     @GetMapping("/articles/{id}")
-    public String show(@PathVariable Long id, Model model){
+    public String show(@PathVariable Long id, Model model){ // path로부터 오는 id 값을 가져옴
         log.info("id : " + id);
 
         Article article = articleRepository.findById(id).orElse(null); // 데이터가 없으면 null값 반환
