@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 @Slf4j // 로깅을 위한 어노테이션
 public class ArticlesController {
@@ -39,7 +41,7 @@ public class ArticlesController {
     }
 
     @GetMapping("/articles/{id}")
-    public String show(@PathVariable Long id, Model model){ // path로부터 오는 id 값을 가져옴
+    public String show(@PathVariable Long id, Model model){ // path로부터 오는 id 값을 가져오는 어노테이션
         log.info("id : " + id);
 
         Article article = articleRepository.findById(id).orElse(null); // 데이터가 없으면 null값 반환
@@ -47,5 +49,13 @@ public class ArticlesController {
         model.addAttribute("article", article);
 
         return "articles/show";
+    }
+
+    @GetMapping("/articles")
+    public String index(Model model){
+        List<Article> articleList = articleRepository.findAll();
+        model.addAttribute("articleList", articleList);
+
+        return "articles/index";
     }
 }
