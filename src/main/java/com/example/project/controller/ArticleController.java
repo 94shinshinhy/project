@@ -16,7 +16,7 @@ import java.util.List;
 
 @Controller
 @Slf4j // 로깅을 위한 어노테이션
-public class ArticlesController {
+public class ArticleController {
 
     @Autowired
     private ArticleRepository articleRepository;
