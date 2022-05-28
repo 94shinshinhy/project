@@ -5,12 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Entity
+@Entity // DB가 해당 객체를 인식 가능하게 해줌
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -18,7 +15,7 @@ import javax.persistence.Id;
 public class Article {
 
     @Id // 대표값을 지정 like a 주민등록번호
-    @GeneratedValue // 자동생성 1, 2, 3, 4 ...
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // DB가 id를 자동 생성해줌
     private Long id;
 
     @Column // 테이블의 단위와 연결되게해줌
