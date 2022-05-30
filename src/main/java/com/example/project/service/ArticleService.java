@@ -6,7 +6,9 @@ import com.example.project.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ArticleService {
@@ -40,5 +42,21 @@ public class ArticleService {
         if(target == null) return null;
         articleRepository.delete(target);
         return target;
+    }
+
+    @Transactional
+    public List<Article> createArticles(List<ArticleForm> dtos) {
+        List<Article> articleList = dtos.stream()
+                .map(dto -> dto.toEntity())
+                .collect(Collectors.toList());
+
+        articleList.stream()
+                .forEach(article -> articleRepository.save(article));
+
+        articleRepository.findById(-1L).orElseThrow(
+                () -> new IllegalArgumentException("실패!")
+        );
+
+        return articleList;
     }
 }
