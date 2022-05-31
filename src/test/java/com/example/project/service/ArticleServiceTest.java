@@ -159,6 +159,7 @@ class ArticleServiceTest {
     }
 
     @Test
+    @Transactional
     void delete_success() {
         // 예상
         Long id = 1L;
@@ -172,6 +173,7 @@ class ArticleServiceTest {
     }
 
     @Test
+    @Transactional
     void delete_fail() {
         // 예상
         Article expected = null;
