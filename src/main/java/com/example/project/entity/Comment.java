@@ -1,5 +1,6 @@
 package com.example.project.entity;
 
+import com.example.project.dto.CommentDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,4 +29,12 @@ public class Comment {
     @Column
     private String body;
 
+    public static Comment toEntity(Article article, CommentDto dto) {
+        if(dto.getId() != null) throw new IllegalArgumentException("댓글의 id가 없어야함");
+        if(article.getId() != dto.getArticleId()) throw new IllegalArgumentException("articlre id와 dto id가 다름");
+        return new Comment(dto.getId(),
+                article,
+                dto.getNickname(),
+                dto.getBody());
+    }
 }

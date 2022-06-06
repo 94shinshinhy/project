@@ -19,18 +19,18 @@ public class ArticleRestController {
     private ArticleService articleService;
 
     // GET
-    @GetMapping("/api/article")
+    @GetMapping("/api/articles")
     public List<Article> index(){
         return articleService.index();
     }
 
-    @GetMapping("/api/article/{id}")
+    @GetMapping("/api/articles/{id}")
     public Article show(@PathVariable Long id){
         return articleService.show(id);
     }
 
     // POST
-    @PostMapping("/api/article")
+    @PostMapping("/api/articles")
     public ResponseEntity<Article> create(@RequestBody ArticleForm dto){
         Article created = articleService.create(dto);
         return (created != null) ?
@@ -39,7 +39,7 @@ public class ArticleRestController {
     }
 
     // PATCH
-    @PatchMapping("/api/article/{id}")
+    @PatchMapping("/api/articles/{id}")
     public ResponseEntity<Article> update(@PathVariable Long id,
                                           @RequestBody ArticleForm dto){
         Article updated = articleService.update(id, dto);
@@ -49,7 +49,7 @@ public class ArticleRestController {
     }
 
     // DELETE
-    @DeleteMapping("/api/article/{id}")
+    @DeleteMapping("/api/articles/{id}")
     public ResponseEntity<Article> delete(@PathVariable Long id){
         Article deleted = articleService.delete(id);
         return (deleted != null) ?
