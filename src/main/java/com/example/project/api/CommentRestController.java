@@ -28,4 +28,19 @@ public class CommentRestController {
 
         return ResponseEntity.status(HttpStatus.OK).body(created);
     }
+
+    @PatchMapping("/api/articles/comments/{id}")
+    public ResponseEntity<CommentDto> updateComment(@PathVariable Long id,
+                                                    @RequestBody CommentDto dto){
+        CommentDto updated = commentService.updateComment(id, dto);
+
+        return ResponseEntity.status(HttpStatus.OK).body(updated);
+    }
+
+    @DeleteMapping("/api/articles/comments/{id}")
+    public ResponseEntity<CommentDto> deleteComment(@PathVariable Long id){
+        CommentDto deleted = commentService.deleteComment(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(deleted);
+    }
 }

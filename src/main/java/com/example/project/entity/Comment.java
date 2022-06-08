@@ -37,4 +37,11 @@ public class Comment {
                 dto.getNickname(),
                 dto.getBody());
     }
+
+    public void patch(CommentDto dto) {
+        if(this.id != dto.getId()) throw new IllegalArgumentException("잘못된 id입니다.");
+
+        if(dto.getNickname() != null) this.nickname = dto.getNickname();
+        if(dto.getBody() != null) this.body = dto.getBody();
+    }
 }

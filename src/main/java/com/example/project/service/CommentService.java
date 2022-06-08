@@ -38,4 +38,24 @@ public class CommentService {
 
         return CommentDto.createCommentDto(created);
     }
+
+    public CommentDto updateComment(Long id, CommentDto dto) {
+        Comment comment = commentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("댓글이 존재하지않음"));
+
+        comment.patch(dto);
+
+        Comment updated = commentRepository.save(comment);
+        
+        return CommentDto.createCommentDto(updated);
+    }
+
+    public CommentDto deleteComment(Long id) {
+        Comment deleted = commentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("댓글이 존재하지않음"));
+
+        commentRepository.delete(deleted);
+
+        return CommentDto.createCommentDto(deleted);
+    }
 }

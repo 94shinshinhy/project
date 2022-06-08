@@ -1,8 +1,10 @@
 package com.example.project.controller;
 
+import com.example.project.dto.CommentDto;
 import com.example.project.entity.Article;
 import com.example.project.dto.ArticleForm;
 import com.example.project.repository.ArticleRepository;
+import com.example.project.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ public class ArticleController {
 
     @Autowired
     private ArticleRepository articleRepository;
+
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/articles/new")
     public String newArticlesForm(){
@@ -47,7 +52,10 @@ public class ArticleController {
 
         Article article = articleRepository.findById(id).orElse(null); // 데이터가 없으면 null값 반환
 
+        List<CommentDto> commentDtos = commentService.comments(id);
+
         model.addAttribute("article", article);
+        model.addAttribute("commentDtos", commentDtos);
 
         return "articles/show";
     }
