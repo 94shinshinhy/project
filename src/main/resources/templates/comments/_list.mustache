@@ -12,6 +12,9 @@
                         data-bs-article-id="{{articleId}}"
                         data-bs-nickname="{{nickname}}"
                         data-bs-body="{{body}}">수정</button>
+                <button type="button"
+                        class="btn-sm btn-danger comment-delete-btn"
+                        btn-comment-id="{{id}}">삭제</button>
             </div>
             <div class="card-body">
                 {{body}}
@@ -103,5 +106,28 @@
             window.location.reload();
         });
     });
+}
+{
+    // 댓글 삭제
+    const commentDeleteBtns = document.querySelectorAll(".comment-delete-btn");
+    commentDeleteBtns.forEach(btn => btn.addEventListener("click", (event) => {
+        const commentDeleteBtn = event.srcElement;
+        const commentId = commentDeleteBtn.getAttribute("btn-comment-id");
+
+        const url = `/api/articles/comments/${commentId}`;
+
+        fetch(url, {
+            method : "DELETE"
+        }).then(response => {
+            if(!(response)){
+                alert("댓글 삭제 실패");
+                return;
+            }
+
+            alert("댓글 삭제 완료");
+            const target = document.querySelector(`#comments-${commentId}`);
+            target.remove();
+        });
+    }));
 }
 </script>
