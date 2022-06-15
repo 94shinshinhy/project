@@ -27,7 +27,7 @@ public class Article {
 
     /* fetch : LAZY는 지연 로딩, EAGER는 즉시 로딩, @xxToMany의 디폴트는 LAZY, @xxToOne의 디폴트는 EAGER
        mappedBy : 양방향 연관관계일 때 반대쪽에 매핑되는 엔티티의 필드값
-       cascade : 영속성전이(특정 엔티티를 영속 상태로 만들 때 연관된 엔티티도 함계 영속 상태로 전이됨
+       cascade : 영속성전이(특정 엔티티를 영속 상태로 만들 때 연관된 엔티티도 함계 영속 상태로 전이됨)
        orphanRemoval : 고아 객체를 삭제해주는 역할
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> Comment = new ArrayList<>();
