@@ -1,5 +1,6 @@
 package com.example.project.api;
 
+import com.example.project.annotation.RunningTime;
 import com.example.project.dto.CommentDto;
 import com.example.project.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ public class CommentRestController {
     }
 
     @DeleteMapping("/api/articles/comments/{id}")
+    @RunningTime
     public ResponseEntity<CommentDto> deleteComment(@PathVariable Long id){
         CommentDto deleted = commentService.deleteComment(id);
 
